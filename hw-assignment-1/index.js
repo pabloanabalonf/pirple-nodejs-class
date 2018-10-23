@@ -2,6 +2,7 @@ const http = require('http');
 const url = require('url');
 const StringDecoder = require('string_decoder').StringDecoder;
 const config = require('./config');
+const messages = require('./messages');
 
 const server = http.createServer((req, res) => {
   // Get the URL and parse it
@@ -50,8 +51,10 @@ const server = http.createServer((req, res) => {
 
 const router = {
   hello: (data, callback) => {
+    // Get random index
+    const index = Math.floor(Math.random() * messages.length);
     callback(200, {
-      message: 'Hi'
+      message: messages[index]
     });
   },
   notFound: (data, callback) => {
